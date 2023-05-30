@@ -22,6 +22,10 @@ return new class extends Migration
             $table->integer('passport_number_code');
             $table->date('passport_date');
             $table->string('password');
+            $table->string('role')->default('student');
+            $table->unsignedBigInteger('group_id')->default(1)->nullable();
+            $table->index('group_id', 'group_user_idx');
+            $table->foreign('group_id', 'group_user_fk')->on('groups')->references('id');
             $table->rememberToken();
             $table->timestamps();
         });

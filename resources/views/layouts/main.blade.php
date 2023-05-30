@@ -10,6 +10,7 @@
     <meta name="keywords" content="bootstrap, bootstrap5" />
 
     <link rel="stylesheet" href="{{asset('style.css')}}">
+    <link rel="stylesheet" href="{{asset('air-datepicker.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
     <title>
@@ -17,13 +18,10 @@
     </title>
 </head>
 <body class="h-100">
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
+<nav class="navbar bg-body-tertiary" style="height: 3.5rem;">
+    <div class="container-fluid bg-light">
         <a class="navbar-brand" href="{{ route('welcome') }}">Synergy site</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarText">
+        <div class="d-flex justify-content-end" id="navbarText">
             @guest()
                 <span class="navbar-text">
                     <a href="{{route('login')}}" class="btn btn-outline-secondary">Login</a>
@@ -32,12 +30,13 @@
             @endguest
             @auth()
             <span class="navbar-text p-0 me-5">
-                <div class="dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><img src="{{ asset('storage/avatar-' . auth()->id() . '.png') }}" height="32px" width="32px" class="rounded-circle me-1">Profile</a>
-                    <ul class="dropdown-menu" style="left: -1rem;">
-                        <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
+                <div class="dropdown" onclick="profile_dropdown();">
+                    <a href="" onclick="event.preventDefault();" class="nav-link dropdown-toggle" role="button"><img src="{{ asset('storage/avatar-' . auth()->id() . '.png') }}" height="32px" width="32px" class="rounded-circle me-1"></a>
+                    <ul class="dropdown-menu" id="dropdown-menu" style="left: -3.5rem; top: 2.5rem;">
+                        <li><a class="dropdown-item" href="{{ route('profile') }}">Профиль</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><form action="{{ route('logout') }}" method="post">
+                        <li>
+                            <form action="{{ route('logout') }}" method="post">
                                 @csrf
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="dropdown-item">Log Out</a>
                             </form>
@@ -49,14 +48,25 @@
         </div>
     </div>
 </nav>
-<div class="w-100" style="height: calc(100% - 3.5rem)">
+<div class="w-100 d-flex" style="height: calc(100% - 3.5rem)">
     @yield('content')
 </div>
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/tiny-slider.js"></script>
-<script src="js/aos.js"></script>
-<script src="js/navbar.js"></script>
-<script src="js/counter.js"></script>
-<script src="js/custom.js"></script>
+<script src="{{asset('air-datepicker.js')}}"></script>
+<script>
+    new AirDatepicker('#airdatepicker', {
+        isMobile: true,
+        autoClose: true,
+        dateFormat: "yyyy-MM-dd",
+        timeFormat: "hh:mm"
+    });
+    function profile_dropdown()
+    {
+        if (document.getElementById('dropdown-menu').classList.contains("show")) {
+            document.getElementById('dropdown-menu').classList.remove("show");
+        } else {
+            document.getElementById('dropdown-menu').classList.add("show");
+        }
+    }
+</script>
 </body>
 </html>

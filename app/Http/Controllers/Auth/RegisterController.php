@@ -27,7 +27,7 @@ class RegisterController extends Controller
         $data['password'] = Hash::make($password);
         $user = User::create($data);
         Mail::to($data['email'])->send(new PasswordMail($password));
-        Avatar::create($request->first_name)->save(storage_path('app/public/avatar-' . $user->id . '.png'));
+        Avatar::create($request->first_name)->save(storage_path('app/public/avatar-' . $user->id . '.png'), 100);
         Auth::login($user);
         return redirect()->route('welcome');
     }

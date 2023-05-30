@@ -4,14 +4,17 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdatePasswordRequest;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class ProfileController extends Controller
 {
-    public function index()
+    public function index(User $user)
     {
-        return view('profile.index');
+        $users = User::all();
+        return view('profile.index', compact('users'));
     }
 
     public function update_password(UpdatePasswordRequest $request)
@@ -30,9 +33,9 @@ class ProfileController extends Controller
 
     public function validate_image(Request $request)
     {
-        $request->validate(['image' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048|dimensions:min_width=100,min_height=100',]);
+        $request->validate(['image' => 'required|image|mimes:jpg,png,jpeg,svg|max:5120|dimensions:min_width=100,min_height=100',]);
         $image = $request->file('image');
-        $path = $image->storeAs('public', 'avatar-' . auth()->id() . '.png');
+        $file = Image::make($image)->resize(1000, 1000)->save(storage_path('app/public/avatar-' . auth()->id() . '.png'));
         return redirect()->back();
     }
 }
