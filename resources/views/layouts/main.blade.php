@@ -20,7 +20,7 @@
 <body class="h-100">
 <nav class="navbar bg-body-tertiary" style="height: 3.5rem;">
     <div class="container-fluid bg-light">
-        <a class="navbar-brand" href="{{ route('welcome') }}">Synergy site</a>
+        <a class="navbar-brand" href="{{ route('welcome') }}"><img style="height: 40px;" src="{{ asset('storage/logo.png') }}" alt="logo"> Synergy Site</a>
         <div class="d-flex justify-content-end" id="navbarText">
             @guest()
                 <span class="navbar-text">

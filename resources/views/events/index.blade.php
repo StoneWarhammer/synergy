@@ -1,10 +1,10 @@
 @extends('mainpage')
 @section('events')
-    <div class="d-flex flex-column bg-light rounded-3" style="width: 97%; height: 97%;">
+    <div class="d-flex flex-column bg-light rounded-3 overflow-auto" style="width: 97%; height: 97%;">
         @if(auth()->user()->role == 'teacher')
             @foreach($events as $event)
                 @if(auth()->user()->id == $event->author->id)
-                    <div class="card h-25 w-75 mb-3">
+                    <div class="card h-25 w-75 m-3">
                         <div class="card-header">
                             <div><a href="{{ route('events_show', ['event' => $event->id]) }}"
                                     class="fs-3 text-decoration-none text-capitalize">{{ $event->title }}</a></div>
@@ -21,8 +21,8 @@
         @endif
         @if(auth()->user()->role == 'student')
             @foreach($events as $event)
-                @if(auth()->user()->group->group_name == $event->group)
-                    <div class="card h-25 w-75 mb-3">
+                @if(auth()->user()->group->group_name == $event->group && $event->visible !== 'no' )
+                    <div class="card h-25 w-75 m-3">
                         <div class="card-header">
                             <div><a href="{{ route('events_show', ['event' => $event->id]) }}"
                                     class="fs-3 text-decoration-none text-capitalize">{{ $event->title }}</a></div>

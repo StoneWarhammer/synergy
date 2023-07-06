@@ -49,6 +49,19 @@
         </ul>
     </div>
     <div class="d-flex w-100 h-100 justify-content-center align-items-center">
-        @yield('events')
+        <div class="d-flex bg-light rounded-3" style="width: 97%; height: 97%;">
+            <div class="d-flex flex-wrap">
+                @foreach($posts as $post)
+                    <a class="text-decoration-none text-dark" href="{{route('post_show', ['post' => $post->id])}}">
+                    <div class="card m-3" style="height: 40vh; width: 302px;">
+                        <img class="card-img-top" style="height: 300px; width: 300px;" src="{{ asset('storage/posts/files/default.jpg') }}">
+                        <div class="card-body overflow-hidden">
+                            <h5 class="card-title">{{ $post->title }}</h5>
+                        </div>
+                    </div>
+                    </a>
+                @endforeach
+            </div>
+        </div>
     </div>
 @endsection

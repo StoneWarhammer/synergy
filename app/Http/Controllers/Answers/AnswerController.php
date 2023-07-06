@@ -10,10 +10,10 @@ use Illuminate\Http\Request;
 
 class AnswerController extends Controller
 {
-    public function index(Answer $answer, Rate $rate)
+    public function index(Answer $answer, Event $event)
     {
         $answers = Answer::all();
-        return view('answers.index', ['answers' => $answers]);
+        return view('answers.index', ['answers' => $answers], compact('event'));
     }
 
     public function show(Answer $answer)

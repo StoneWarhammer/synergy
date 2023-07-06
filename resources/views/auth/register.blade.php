@@ -14,16 +14,16 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="first_name" class="form-label">Имя</label>
-                        <input name="first_name" type="text" class="form-control {{ $errors->has('first_name') ? 'is-invalid' : ''}}" id="first_name">
-                        @error('first_name')
+                        <label for="last_name" class="form-label">Фамилия</label>
+                        <input name="last_name" type="text" class="form-control {{ $errors->has('last_name') ? 'is-invalid' : ''}}" id="last_name">
+                        @error('last_name')
                         <div id="emailHelp" class="form-text text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="last_name" class="form-label">Фамилия</label>
-                        <input name="last_name" type="text" class="form-control {{ $errors->has('last_name') ? 'is-invalid' : ''}}" id="last_name">
-                        @error('last_name')
+                        <label for="first_name" class="form-label">Имя</label>
+                        <input name="first_name" type="text" class="form-control {{ $errors->has('first_name') ? 'is-invalid' : ''}}" id="first_name">
+                        @error('first_name')
                         <div id="emailHelp" class="form-text text-danger">{{ $message }}</div>
                         @enderror
                     </div>
@@ -37,14 +37,14 @@
                     <div class="mb-3 d-flex">
                         <div class="w-50">
                             <label for="passport_serial_code" class="form-label">Серийный номер паспорта</label>
-                            <input name="passport_serial_code" maxlength="4" type="text" class="form-control w-75 {{ $errors->has('passport_serial_code') ? 'is-invalid' : ''}}" id="passport_serial_code">
+                            <input name="passport_serial_code" placeholder="1 2 3 4" maxlength="4" type="text" class="form-control w-75 {{ $errors->has('passport_serial_code') ? 'is-invalid' : ''}}" id="passport_serial_code">
                             @error('passport_serial_code')
                             <div id="emailHelp" class="form-text text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="w-50">
                             <label for="passport_number_code" class="form-label">Код паспорта</label>
-                            <input name="passport_number_code" maxlength="6" type="text" class="form-control  w-75 {{ $errors->has('passport_number_code') ? 'is-invalid' : ''}}" id="passport_number_code">
+                            <input name="passport_number_code" placeholder="1 2 3 4 5 6" maxlength="6" type="text" class="form-control  w-75 {{ $errors->has('passport_number_code') ? 'is-invalid' : ''}}" id="passport_number_code">
                             @error('passport_number_code')
                             <div id="emailHelp" class="form-text text-danger">{{ $message }}</div>
                             @enderror

@@ -29,7 +29,6 @@ class EventsController extends Controller
 
     public function store(Request $request, Event $event)
     {
-
         $data = $request->validate([
             'title' => 'required|min:2|max:150|string',
             'subtitle' => 'max:150',
@@ -51,18 +50,23 @@ class EventsController extends Controller
         $events = Event::all();
         $paths = [];
 
-        foreach ($request->file('file') as $file)
+        if ($request->file == true)
         {
-            $paths[] = $file->store('events/files', 'public');
+            foreach ($request->file('file') as $file)
+            {
+                $paths[] = $file->store('events/files', 'public');
+            }
+
+            foreach ($paths as $path)
+            {
+                $path = str_replace('events/files/', '',$path);
+                EventFiles::create([
+                    'file' => $path,
+                    'event_id' => $events->max('id'),
+                ]);
+            }
         }
 
-        foreach ($paths as $path)
-        {
-            EventFiles::create([
-                'file' => $path,
-                'event_id' => $events->max('id'),
-            ]);
-        }
 
         return redirect()->route('events');
     }
@@ -97,7 +101,7 @@ class EventsController extends Controller
         $answers = Answer::all();
         $paths = [];
 
-        if ($request->file('file') === true)
+        if ($request->file == true)
         {
             foreach ($request->file('file') as $file)
             {
@@ -106,6 +110,7 @@ class EventsController extends Controller
 
             foreach ($paths as $path)
             {
+                $path = str_replace('events/files/', '',$path);
                 AnswerFiles::create([
                     'file' => $path,
                     'answer_id' => $answer->max('id'),

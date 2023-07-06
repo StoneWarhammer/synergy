@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('event_files', function (Blueprint $table) {
+        Schema::create('post_files', function (Blueprint $table) {
             $table->id();
             $table->string('file')->nullable();
-//            $table->unsignedBigInteger('event_id');
-//            $table->index('event_id', 'event_file_idx');
-//            $table->foreign('event_id', 'event_file_fk')->on('events')->references('id');
-            $table->foreignId('event_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('post_id');
+            $table->index('post_id', 'post_file_idx');
+            $table->foreign('post_id', 'post_file_fk')->on('posts')->references('id');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('event_files');
+        Schema::dropIfExists('post_files');
     }
 };

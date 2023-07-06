@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Rate extends Model
+class Post extends Model
 {
     use HasFactory, Notifiable;
+
     protected $guarded = false;
 
-    public function event()
+    public function files()
     {
-        return $this->belongsTo(Event::class, 'event_id', 'id');
+        return $this->hasMany(PostFiles::class, 'post_id', 'id');
     }
 }

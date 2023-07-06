@@ -18,11 +18,12 @@ return new class extends Migration
             $table->text('task');
             $table->timestamp('start_time');
             $table->timestamp('end_time');
-            $table->unsignedBigInteger('author_id');
             $table->string('group');
-            $table->index('author_id', 'event_author_idx');
-            $table->foreign('author_id', 'event_author_fk')->on('users')->references('id');
-
+            $table->string('visible')->default('yes');
+//            $table->index('author_id', 'event_author_idx');
+//            $table->unsignedBigInteger('author_id');
+//            $table->foreign('author_id', 'event_author_fk')->on('users')->references('id');
+            $table->foreignId('author_id')->constrained();
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@
         @if(session('rate'))
             <div class="border border-success border-opacity-50 rounded border-3 text-center">{{ session('rate') }}</div>
         @endif
-        @foreach($answers as $answer)
+        @foreach($answers->where('answer_event_id', $event->id) as $answer)
             <div class="card w-75 mb-3">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <div>
@@ -22,23 +22,7 @@
             </div>
         @endforeach
     </div>
-    <script>
-        var rates = document.querySelectorAll("#rate");
-        rates.forEach(rate => {
-            if (rate.innerText === '2') {
-                rate.style.color = 'red';
-            }
-            if (rate.innerText === '3') {
-                rate.style.color = 'darkorange';
-            }
-            if (rate.innerText === '4') {
-                rate.style.color = 'olivedrab';
-            }
-            if (rate.innerText === '5') {
-                rate.style.color = 'green';
-            }
-        });
-    </script>
+    <script src="{{ asset('script.js') }}"></script>
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
     <script>
 
